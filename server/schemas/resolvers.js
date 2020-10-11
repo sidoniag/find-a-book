@@ -1,5 +1,5 @@
-const { AuthenticationError } = require('apollo-server-express');
 const { User, Book } = require('../models');
+const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -10,36 +10,31 @@ const resolvers = {
             const userData = await User.findOne({ _id: context.user._id })
                 .select('-__v -password')
                 // .populate('thoughts')
-                .populate('books');
+                .populate('books')};
 
             return userData;
         }
+    },
 
-        throw new AuthenticationError('Not logged in');
-    },
-        users: async () => {
-            return User.find()
-                .select('-__v -password')
-                // .populate('friends')
-                .populate('books');
-        },
-        user: async (parent, { username }) => {
-            return User.findOne({ username })
-                .select('-__v -password')
-                .populate('friends')
-                .populate('books');
-        },
-        // books: async (parent, { query }) => {
-        //     const params = books ? { guery } : {};
-        //     return Book.find(params).sort({ createdAt: -1 });
-        // },
-        book: async (parent, { _id }) => {
-            return Book.find(params);
-        },
-        // books: async (parent, { _id }) => {
-        //     return Book.findOne({ _id });
-        // },
-    },
+    //     throw new AuthenticationError('Not logged in');
+    //     user: async (parent, { username }) => {
+    //         return User.findOne({ username })
+    //             .select('-__v -password')
+    //             .populate('friends')
+    //             .populate('books');
+    //     },
+    //     // books: async (parent, { query }) => {
+    //     //     const params = books ? { guery } : {};
+    //     //     return Book.find(params).sort({ createdAt: -1 });
+    //     // },
+    //     book: async () => {
+    //         return Book.find()
+    //         .populate('book');
+    //     },
+    //     // books: async (parent, { _id }) => {
+    //     //     return Book.findOne({ _id });
+    //     // },
+    // },
     Mutation: {
         addUser: async (parent, args) => {
             const user = await User.create(args);
