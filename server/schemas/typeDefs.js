@@ -8,8 +8,7 @@ const typeDefs = gql`
         me: User
         users: [User]
         user(username: String!): User
-        book(username: String): [Book]
-        book(id:ID!): Book
+        book(id:ID!): [Book]
     }
 
     type Mutation {
@@ -32,7 +31,6 @@ const typeDefs = gql`
         author(firstName: String, lastName: String): Auth
         description: String
         title: String
-        image: Src
         link: String
     }
     
