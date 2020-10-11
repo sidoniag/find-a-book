@@ -1,8 +1,9 @@
-const { User, Book } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
+const { User, Book } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
+
     Query: {
         me: async (parent, args, context) => {
             if (context.user) {
@@ -20,21 +21,24 @@ const resolvers = {
             return User.find()
                 .select('-__v -password')
                 .populate('friends')
-                .populate('thoughts');
+                .populate('books');
         },
         user: async (parent, { username }) => {
             return User.findOne({ username })
                 .select('-__v -password')
                 .populate('friends')
-                .populate('thoughts');
+                .populate('books');
         },
-        books: async (parent, { username }) => {
-            const params = username ? { username } : {};
-            return Book.find(params).sort({ createdAt: -1 });
-        },
+        // books: async (parent, { query }) => {
+        //     const params = books ? { guery } : {};
+        //     return Book.find(params).sort({ createdAt: -1 });
+        // },
         books: async (parent, { _id }) => {
-            return Book.findOne({ _id });
+            return Book.find(params);
         },
+        // books: async (parent, { _id }) => {
+        //     return Book.findOne({ _id });
+        // },
     },
     Mutation: {
         addUser: async (parent, args) => {

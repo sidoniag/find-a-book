@@ -1,20 +1,22 @@
 const express = require('express');
-// const path = require('path');
-// import ApolloServer
 const { ApolloServer } = require('apollo-server-express');
+const path = require('path');
+// import ApolloServer
+
 // const routes = require('./routes');
 
 // import typeDefs and resolvers
 const { typeDefs, resolvers } = require('./schemas');
-const db = require('./config/connection');
 const { authMiddleware } = require('./utils/auth');
+const db = require('./config/connection');
 
-const app = express();
 const PORT = process.env.PORT || 3001;
+const app = express();
 // create a new Apollos server and pass in our schema
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  playground: true,
   context: authMiddleware
 });
 
@@ -29,7 +31,9 @@ app.use(express.json());
 //   app.use(express.static(path.join(__dirname, '../client/build')));
 // }
 
-// app.use(routes);
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// });
 
 db.once('open', () => {
   app.listen(PORT, () => {

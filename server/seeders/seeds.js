@@ -4,7 +4,7 @@ const db = require('../config/connection');
 const { Thought, User } = require('../models');
 
 db.once('open', async () => {
-  await Thought.remove({});
+  await Book.remove({});
   await User.remove({});
 
   // create user data
