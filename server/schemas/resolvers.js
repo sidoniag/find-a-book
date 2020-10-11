@@ -13,16 +13,18 @@ const resolvers = {
                 .populate('books')};
 
             return userData;
-        }
-    },
-
+        },
+    
     //     throw new AuthenticationError('Not logged in');
-    //     user: async (parent, { username }) => {
+    // },
+
+    // user: async (parent, { username }) => {
     //         return User.findOne({ username })
     //             .select('-__v -password')
     //             .populate('friends')
     //             .populate('books');
-    //     },
+    // },
+},
     //     // books: async (parent, { query }) => {
     //     //     const params = books ? { guery } : {};
     //     //     return Book.find(params).sort({ createdAt: -1 });
@@ -57,7 +59,15 @@ const resolvers = {
 
             const token = signToken(user);
             return { token, user };
-        }
+        },
+        // saveBook: async(parent,{ bookId, book }) => {
+        //     const book = await Book.findOneAndUpdate(
+        //         {_id: bookId },
+        //         { $push: {book: {bookId, userData: context.user.populate }}},
+        //         { new: true, runValidators: true }
+        //         );
+        //     return updatedBook;
+        // }
     }
 };
 
