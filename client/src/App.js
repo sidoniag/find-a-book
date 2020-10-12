@@ -6,6 +6,8 @@ import ApolloClient from 'apollo-boost';
 import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
+import LoginForm from './components/LoginForm';
+import SignupForm from './components/SignupForm';
 
 const client = new ApolloClient({
   request: operation => {
@@ -22,6 +24,7 @@ const client = new ApolloClient({
 
 function App() {
   return (
+    <ApolloProvider client={client}>
     <Router>
       <>
         <Navbar />
@@ -29,9 +32,12 @@ function App() {
           <Route exact path='/' component={SearchBooks} />
           <Route exact path='/saved' component={SavedBooks} />
           <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
+          <Route exact path='/signup' component={SignupForm} />
+          <Route exact path='/login' component={LoginForm} />
         </Switch>
       </>
     </Router>
+    </ApolloProvider>
   );
 }
 
