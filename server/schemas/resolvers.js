@@ -14,66 +14,56 @@ const resolvers = {
 
             return userData;
         }
-    
-    //     throw new AuthenticationError('Not logged in');
-    // },
-        },
+        throw new AuthenticationError('Not logged in');
+    },
+
     },
 
     Mutation: {
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+
+            if(!user) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+
+            const correctPw = await user.isCorrectPassword(password);
+
+            if (!correctPw) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+
+            const token = signToken(user);
+            return { token, user };
+        },
         addUser: async (parent, args) => {
             const user = await User.create(args);
             const token = signToken(user);
 
             return new { token, user };
         },
-        // login: async (parent, { email, password }) => {
-        //     const user = await User.findOne({ email });
-
-        //     if(!user) {
-        //         throw new AuthenticationError('Incorrect credentials');
-        //     }
-
-        //     const correctPw = await user.isCorrectPassword(password);
-
-        //     if (!correctPw) {
-        //         throw new AuthenticationError('Incorrect credentials');
-        //     }
-
-        //     const token = signToken(user);
-        //     return { token, user };
-        // },
-        // saveBook: async(parent,{ bookId, book }) => {
-        //     const book = await Book.findOneAndUpdate(
-        //         {_id: bookId },
-        //         { $push: {book: {bookId, userData: context.user.populate }}},
-        //         { new: true, runValidators: true }
-        //         );
-        //     return User;
-        // }
-               // removeBook: async(parent,{ bookId, book }) => {
-        //     const book = await Book.findOneAndUpdate(
-        //         {_id: bookId },
-        //         { $pull: {book: {bookId, userData: context.user.populate }}},
-        //         { new: true, runValidators: true }
-        //         );
-        //     return User;
-        // }
-
-        // saveBook(bookData: BookInput):User
-        // removeBook(bookId: ID!):User
-
-        // remove a book from `savedBooks`
-//   async deleteBook({ user, params }, res) {
-//     const updatedUser = await User.findOneAndUpdate(
-//       { _id: user._id },
-//       { $pull: { savedBooks: { bookId: params.bookId } } },
-//       { new: true }
-//     );
-//     if (!updatedUser) {
-//       return res.status(404).json({ message: "Couldn't find user with this id!" });
-//     }
-//     return res.json(updatedUser);
+   
+        saveBook: async(parent,{ dataBook }, context ) => {
+            if (context.user) {
+            const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id  },
+                { $push: {savedBooks: dataBook}},
+                { new: true }
+                );
+            return updatedUser;
+            }
+        },
+        removeBook: async(parent,{ bookId }, context ) => {
+            if (context.user) {
+                const updateUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: {book: { savedBooks: {bookId, bookId } } },
+                { new: true }
+                );
+            return updatedUser;
+                }
+        throw new AuthenticationError('You need to be logged in.');
+            }
     }
 
 };
