@@ -25,7 +25,7 @@ const resolvers = {
             const user = await User.create(args);
             const token = signToken(user);
 
-            return { token, user };
+            return new { token, user };
         },
         // login: async (parent, { email, password }) => {
         //     const user = await User.findOne({ email });
@@ -49,8 +49,31 @@ const resolvers = {
         //         { $push: {book: {bookId, userData: context.user.populate }}},
         //         { new: true, runValidators: true }
         //         );
-        //     return updatedBook;
+        //     return User;
         // }
+               // removeBook: async(parent,{ bookId, book }) => {
+        //     const book = await Book.findOneAndUpdate(
+        //         {_id: bookId },
+        //         { $pull: {book: {bookId, userData: context.user.populate }}},
+        //         { new: true, runValidators: true }
+        //         );
+        //     return User;
+        // }
+
+        // saveBook(bookData: BookInput):User
+        // removeBook(bookId: ID!):User
+
+        // remove a book from `savedBooks`
+//   async deleteBook({ user, params }, res) {
+//     const updatedUser = await User.findOneAndUpdate(
+//       { _id: user._id },
+//       { $pull: { savedBooks: { bookId: params.bookId } } },
+//       { new: true }
+//     );
+//     if (!updatedUser) {
+//       return res.status(404).json({ message: "Couldn't find user with this id!" });
+//     }
+//     return res.json(updatedUser);
     }
 
 };
