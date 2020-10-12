@@ -34,6 +34,8 @@ function App() {
           <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
           <Route exact path='/signup' component={SignupForm} />
           <Route exact path='/login' component={LoginForm} />
+
+          <Route component={NoMatch} />
         </Switch>
       </>
     </Router>
