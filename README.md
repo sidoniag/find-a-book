@@ -19,7 +19,7 @@ It is set up to allow users to search for and save books once signed-up and logg
 
 ### Deployed
 
-[Heroku](https:///herokuapp.com)
+[Heroku](https://shielded-wildwood-70851.herokuapp.com/ )
 
 ### Page Preview
 
