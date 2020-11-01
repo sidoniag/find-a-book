@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
-  "homepage": "./build",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "cd server && npm start",
@@ -15,13 +14,15 @@
     "type": "git",
     "url": "git@work.github.com:sidoniag/find-a-book-app.git"
   },
+  "homepage": "https://github.com/sidoniag/find-a-book#readme",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "if-env": "^1.0.4",
     "mongodb": "^3.6.2",
-    "node": "^14.13.1"
+    "node": "^14.13.1",
+    "react": "^17.0.1"
   },
   "devDependencies": {
     "concurrently": "^5.2.0"
