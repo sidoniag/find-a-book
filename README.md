@@ -15,11 +15,11 @@ It is set up to allow users to search for and save books once signed-up and logg
 
 ### Github 
 
-[Github](https://github.com/sidoniag/io/find-a-book) 
+[Github](https://github.com/sidoniag/find-a-book) 
 
 ### Deployed
 
-[Heroku](https:///herokuapp.com)
+[Heroku](https://shielded-wildwood-70851.herokuapp.com/)
 
 ### Page Preview
 Home
