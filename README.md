@@ -22,4 +22,11 @@ It is set up to allow users to search for and save books once signed-up and logg
 [Heroku](https://shielded-wildwood-70851.herokuapp.com/ )
 
 ### Page Preview
-
+Home
+<img src="/book_home.png">
+<br/>
+Search History
+<img src="/book_search.png">
+<br/>
+Search Result
+<img src="/book_result.png">
