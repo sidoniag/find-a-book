@@ -5,7 +5,7 @@
   "main": "server/server.js",
   "homepage": "https://sidoniag.github.com/find-a-book",
   "scripts": {
-    "predeploy": "npm run build",
+    "predeploy": "cd client && npm run build",
     "deploy": "gh-pages -d build",
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "cd server && npm start",
