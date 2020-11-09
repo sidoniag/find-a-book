@@ -1,12 +1,10 @@
 {
+  "homepage": "https://sidoniag.github.com/find-a-book",
   "name": "find-a-book",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
-  "homepage": "https://sidoniag.github.com/find-a-book",
   "scripts": {
-    "predeploy": "cd client && npm run build",
-    "deploy": "gh-pages -d build",
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "cd server && npm start",
     "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
@@ -24,7 +22,6 @@
     "if-env": "^1.0.4"
   },
   "devDependencies": {
-    "concurrently": "^5.2.0",
-    "gh-pages": "^3.1.0"
+    "concurrently": "^5.2.0"
   }
 }
